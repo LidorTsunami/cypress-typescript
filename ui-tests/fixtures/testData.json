@@ -1,0 +1,21 @@
+{
+  "products": {
+    "pencilSharpener": {
+      "searchQuery": "Bostitch Office Personal Electric Pencil Sharpener, Powerful Stall-Free Motor, High Capacity Shavings Tray, Gray (EPS4-KTGRAY)",
+      "productText": "Office Personal Electric Pencil Sharpener, Powerful Stall-Free Motor, High Capacity Shavings Tray, Gray (EPS4-KTGRAY)"
+    },
+    "scissors": {
+      "url": "https://www.amazon.com/Scissors-iBayam-Crafting-Scrapbooking-Knitting/dp/B07H3QKN2Z",
+      "colorText": "Red, Black, Blue",
+      "productText": "Scissors, iBayam 8\" All Purpose Scissors Bulk 3-Pack, Ultra Sharp 2.5mm Thick Blade Shears Comfort-Grip for Office Desk Accessories Sewing Fabric Home Craft School Supplies, Right/Left Handed"
+    }
+  },
+  "customerService": {
+    "searchQuery": "wheres my stuff",
+    "expectedTitle": "Where's My Stuff",
+    "expectedUrlIncludes": [
+      "customer/display.html",
+      "nodeId=GLMXPL8LEQBMUWDA"
+    ]
+  }
+}
