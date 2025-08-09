@@ -1,10 +1,12 @@
 export class CartPage {
-    constructor() {}
+    private readonly cartLocator: string;
+
+    constructor() {
+        this.cartLocator = '#activeCartViewForm';
+    }
 
     verifyItemsInCartByItemText(...texts: string[]): void {
-        const locator = '#activeCartViewForm';
-
-        cy.get(locator)
+        cy.get(this.cartLocator)
             .should('be.visible')
             .invoke('text')
             .then((elementText: string) => {
