@@ -4,6 +4,9 @@ import { CustomerServicePage } from "../pages/customerServicePage";
 import { WheresMyStuffSolutionPage } from "../pages/wheresMyStuffSolutionPage";
 import testData from '../fixtures/testData.json';
 import {CustomerService} from "../interfaces/interface";
+import {handleUncaughtExceptions} from "../support/commands";
+
+handleUncaughtExceptions();
 
 describe('Navigate to wheres my stuff solution page', () => {
     let homePage: HomePage;
@@ -23,7 +26,7 @@ describe('Navigate to wheres my stuff solution page', () => {
         customerPage.searchHelp(wheresMyStuff.searchQuery);
         wheresMyStuffSolutionPage = customerPage.clickSearchResultLinkByIndex(0);
 
-        wheresMyStuff.expectedUrlIncludes.forEach(part =>
+        wheresMyStuff.expectedUrlIncludes.forEach((part: string) =>
             cy.url().should('include', part)
         );
 

@@ -1,7 +1,10 @@
 import {cartPage} from '../support/setupTest';
 import testData from '../fixtures/testData.json';
+import {handleUncaughtExceptions} from "../support/commands";
 
 const { pencilSharpener, scissors } = testData.products;
+
+handleUncaughtExceptions();
 
 describe('Amazon functionalities with 2 product in cart', () => {
 

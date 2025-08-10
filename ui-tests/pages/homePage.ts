@@ -101,6 +101,7 @@ export class HomePage extends Browser {
     }
 
     goToCustomerService(): CustomerServicePage {
+        this.dismissPopUp();
         cy.get(this.menuItems).contains('a', 'Customer Service').click({ force: true });
         return new CustomerServicePage();
     }
