@@ -16,7 +16,7 @@ cypress-typescript/
 │ ├── fixtures/ # Test data
 │ └── support/ # Custom commands and support files
 ├── cypress.config.ts # Cypress configuration in TypeScript
-├── Dockerfile # for tests image
+├── Dockerfile # Tests image
 ├── package.json # Dependencies and scripts
 └── tsconfig.json # TypeScript configuration
 ---
