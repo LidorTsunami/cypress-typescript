@@ -1,22 +1,22 @@
-interface Product {
+export interface Product {
     searchQuery?: string;
     productText: string;
     url?: string;
     colorText?: string;
 }
 
-interface Products {
+export interface Products {
     pencilSharpener: Product;
     scissors: Product;
 }
 
-interface CustomerService {
+export interface CustomerService {
     searchQuery: string;
     expectedTitle: string;
     expectedUrlIncludes: string[];
 }
 
-interface TestData {
+export interface TestData {
     products: Products;
     customerService: CustomerService;
 }

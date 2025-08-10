@@ -1,13 +1,25 @@
-import {CartPage} from "./cartPage";
+import { CartPage } from "./cartPage";
+import { Browser } from "./browser";
+import testData from '../fixtures/testData.json';
 
-export class ProductPage {
+export class ProductPage extends Browser {
     private readonly addToCartButtonSelector: string;
     private readonly addAlertSelector: string;
-
+    private readonly addToCartConfirmationSelector: string;
+    private readonly colorSwatchXpathTemplate: string;
+    private readonly colorTextSelector: string;
+    private readonly cartIconSelector: string;
+    private readonly defaultColorText: string;
 
     constructor() {
+        super();
         this.addToCartButtonSelector = '#add-to-cart-button';
         this.addAlertSelector = '#attachDisplayAddBaseAlert';
+        this.addToCartConfirmationSelector = 'h1.a-size-medium-plus.a-color-base.sw-atc-text.a-text-bold';
+        this.colorSwatchXpathTemplate = '//li[contains(@class, "dimension-value-list-item-square-image")][.//img[@alt="{{ALT_TEXT}}"]]';
+        this.colorTextSelector = 'tr.a-spacing-small.po-color td.a-span9 > span.a-size-base.po-break-word';
+        this.cartIconSelector = '#nav-cart';
+        this.defaultColorText = testData.products.scissors.colorText;
     }
 
     addToCartAndVerify(): void {
@@ -23,7 +35,7 @@ export class ProductPage {
                         .should('be.visible')
                         .and('contain.text', 'Added to cart');
                 } else {
-                    cy.get('h1.a-size-medium-plus.a-color-base.sw-atc-text.a-text-bold')
+                    cy.get(this.addToCartConfirmationSelector)
                         .should('be.visible')
                         .and('contain.text', 'Added to cart');
                 }
@@ -31,20 +43,17 @@ export class ProductPage {
         });
     }
 
-
-
-    clickColorSwatch(altText: string = "Red, Black, Blue"): void {
-        cy.xpath(`//li[contains(@class, "dimension-value-list-item-square-image")][.//img[@alt="${altText}"]]`)
-            .click();
+    clickColorSwatch(altText: string = this.defaultColorText): void {
+        const xpath: string = this.colorSwatchXpathTemplate.replace('{{ALT_TEXT}}', altText);
+        cy.xpath(xpath).click();
     }
 
-    verifyColorText(expectedText: string = "Red, Black, Blue"): void {
-        cy.get('tr.a-spacing-small.po-color td.a-span9 > span.a-size-base.po-break-word')
-            .should('have.text', expectedText);
+    verifyColorText(expectedText: string = this.defaultColorText): void {
+        cy.get(this.colorTextSelector).should('have.text', expectedText);
     }
 
     goToCartPage(): CartPage {
-        cy.get('#nav-cart').click();
+        cy.get(this.cartIconSelector).click();
         return new CartPage();
     }
 }

@@ -1,30 +1,33 @@
 import {CustomerServicePage} from "./customerServicePage";
 import 'cypress-xpath';
 import {ProductPage} from "./productPage";
+import {Browser} from "./browser";
 
-export class HomePage {
+export class HomePage extends Browser {
     private readonly searchInputSelector: string;
-    private maxRetries: number = 5;
-    private retries :number = 0;
     private readonly popupDismissButton: string;
-    private locationModalTrigger: string;
-    private countryDropdownButton: string;
-    private israelOption: string;
-    private doneButton: string;
+    private readonly locationModalTrigger: string;
+    private readonly countryDropdownButton: string;
+    private readonly israelOption: string;
+    private readonly doneButton: string;
     private readonly locationPopoverLinkId: string;
-    private readonly menuItems : string
+    private readonly menuItems: string;
+    private readonly productByTextXpathTemplate: string;
+
+    private maxRetries: number = 5;
+    private retries: number = 0;
 
     constructor() {
-        this.menuItems = '#nav-xshop'
-        this.popupDismissButton =
-            'input.a-button-input[data-action-type="DISMISS"][data-action-params*="AIS_INGRESS"]';
+        super();
+        this.menuItems = '#nav-xshop';
+        this.popupDismissButton = 'input.a-button-input[data-action-type="DISMISS"][data-action-params*="AIS_INGRESS"]';
         this.searchInputSelector = '#twotabsearchtextbox';
         this.locationModalTrigger = '#glow-ingress-block';
-        this.countryDropdownButton =
-            'span.a-button-text.a-declarative[role="radiogroup"][data-action="a-dropdown-button"]';
+        this.countryDropdownButton = 'span.a-button-text.a-declarative[role="radiogroup"][data-action="a-dropdown-button"]';
         this.israelOption = 'a.a-dropdown-link';
         this.doneButton = 'button.a-button-text';
         this.locationPopoverLinkId = 'nav-global-location-popover-link';
+        this.productByTextXpathTemplate = `//div[@class="a-section a-spacing-base"][.//h2[@aria-label="{PRODUCT_TEXT}"]]`;
     }
 
     dismissPopUp() {
@@ -37,17 +40,15 @@ export class HomePage {
         });
     }
 
-
     searchAmazon(query: string) {
         cy.get(this.searchInputSelector).type(`${query}{enter}`);
     }
 
     clickProductByText(productText: string): ProductPage {
-        cy.xpath(`//div[@class="a-section a-spacing-base"][.//h2[@aria-label="${productText}"]]`)
-            .click();
+        const xpath: string = this.productByTextXpathTemplate.replace('{PRODUCT_TEXT}', productText);
+        cy.xpath(xpath).click();
         return new ProductPage();
     }
-
 
     settingLocationIsrael() {
         cy.get(this.locationModalTrigger).click();
@@ -68,7 +69,7 @@ export class HomePage {
 
     ensureLocationPopoverLinkExists() {
         const check: () => void = () => {
-            cy.document().then(doc => {
+            cy.document().then((doc: Document) => {
                 const elem: HTMLElement | null = doc.getElementById(this.locationPopoverLinkId);
                 if (elem && Cypress.dom.isVisible(elem)) {
                     cy.log('Location popover link found');

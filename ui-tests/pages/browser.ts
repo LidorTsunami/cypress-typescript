@@ -5,9 +5,9 @@ export class Browser {
         cy.visit(url)
     }
 
-    gotoAmazon(): HomePage {
+    gotoAmazon()  {
         this.goTo('/');
-        return new HomePage();
+
     }
 
     reload(): void {
