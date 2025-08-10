@@ -4,7 +4,7 @@ import { CustomerServicePage } from "../pages/customerServicePage";
 import { WheresMyStuffSolutionPage } from "../pages/wheresMyStuffSolutionPage";
 import testData from '../fixtures/testData.json';
 
-describe('Amazon main menu and navigation', () => {
+describe('Navigate to wheres my stuff solution page', () => {
     let homePage: HomePage;
     let wheresMyStuffSolutionPage: WheresMyStuffSolutionPage;
 
