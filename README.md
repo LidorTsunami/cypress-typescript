@@ -19,21 +19,14 @@ cypress-typescript/
 └── tsconfig.json          # TypeScript configuration
 🚀 Getting Started
 1. Clone the Repository
-   bash
-   Copy
-   Edit
    git clone https://github.com/your-repo/cypress-typescript.git
-   cd cypress-typescript
+
 2. Install Dependencies
-   bash
-   Copy
-   Edit
    npm install
-3. Run Cypress Locally
-   bash
-   Copy
-   Edit
+   
+4. Run Cypress Locally
    npx cypress open
+   
    This will open the Cypress Test Runner UI where you can run individual test specs.
 
 🐳 Running with Docker
@@ -45,6 +38,12 @@ If you prefer running tests in a Docker container:
    docker run --rm cypress-tests
    🛠 Tech Stack
    Cypress – UI Testing Framework
+
+We have set up a GitHub Actions workflow that automatically runs the Cypress UI tests inside a Docker container every time code is merged into the master branch. This pipeline performs the following steps:
+* Checks out the latest code from the repository
+* Builds a Docker image containing the test environment and code
+* Runs the Cypress tests inside this container
+This automated process ensures that the UI tests are executed consistently on every merge, helping maintain code quality and catch any regressions early before deployment.
 
 TypeScript – Type-safe JavaScript
 
