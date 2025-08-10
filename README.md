@@ -25,7 +25,7 @@ cypress-typescript/
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/your-repo/cypress-typescript.git
+git clone https://github.com/LidorTsunami/cypress-typescript
 cd cypress-typescript
 ```
 
