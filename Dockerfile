@@ -8,4 +8,5 @@ RUN npm ci
 
 COPY . .
 
-CMD ["npx", "cypress", "run", "--config-file", "cypress.config.ts"]
+CMD ["npx", "cypress", "run", "--browser", "chrome"]
+

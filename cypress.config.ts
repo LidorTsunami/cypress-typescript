@@ -1,4 +1,6 @@
 import { defineConfig } from "cypress";
+import PluginEvents = Cypress.PluginEvents;
+import PluginConfigOptions = Cypress.PluginConfigOptions;
 
 export default defineConfig({
     e2e: {
@@ -12,5 +14,10 @@ export default defineConfig({
             openMode: 0,
         },
         defaultCommandTimeout: 8000,
+
+        setupNodeEvents(on: PluginEvents, config: PluginConfigOptions) {
+            config.env.ELECTRON_EXTRA_LAUNCH_ARGS = '--disable-gpu';
+            return config;
+        },
     },
 });
