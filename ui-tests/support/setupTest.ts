@@ -22,12 +22,13 @@ beforeEach(() => {
 
     homePage.searchAmazon(pencilSharpener.searchQuery);
     productPage = homePage.clickProductByText(pencilSharpener.productText);
-    productPage.addToCartAndVerify();
 
+    productPage.addToCartAndVerify();
     productPage.goTo(scissors.url);
-    productPage = new ProductPage();
+
     productPage.clickColorSwatch(scissors.colorText);
     productPage.verifyColorText(scissors.colorText);
+
     productPage.scrollToTop();
     productPage.addToCartAndVerify();
 
